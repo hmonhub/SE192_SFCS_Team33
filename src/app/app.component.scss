@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.sidenav-container {
+	flex: 1;
+}
+
+.sidenav {
+	padding: 10px;
+	width: 180px;
+	//background-color: #cdcfd4;
+}
+
+.fill {
+	flex: 1 1 auto;
+}
+
+.menu-button{
+	margin-right: 10px;
+}
+
+.container-body {
+	padding: 10px;
+}
