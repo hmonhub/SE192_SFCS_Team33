@@ -1,0 +1,101 @@
+<mat-grid-list cols="6" rowHeight="54px">
+	<mat-grid-tile [colspan]="6" [rowspan]="1">
+		<div class="grid-container">
+			<mat-card>QUẢN LÝ NHÂN VIÊN</mat-card>
+		</div>
+	</mat-grid-tile>
+    <mat-grid-tile [colspan]="5" [rowspan]="10">
+		<div class="grid-container">
+			<mat-table [dataSource]="source" class="mat-elevation-z8 container">
+				<ng-container matColumnDef="id">
+					<mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+				</ng-container>
+			
+				<ng-container matColumnDef="name">
+					<mat-header-cell *matHeaderCellDef> Tên </mat-header-cell>
+					<mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+				</ng-container>
+
+	 
+				<ng-container matColumnDef="position">
+					<mat-header-cell *matHeaderCellDef> Chức vụ </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.position}}</mat-cell>
+				</ng-container>
+				
+				<ng-container matColumnDef="phone_number">
+					<mat-header-cell *matHeaderCellDef> Điện thoại </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.phone_number}}</mat-cell>
+				</ng-container>
+	  
+				
+				<ng-container matColumnDef="action">
+					<mat-header-cell *matHeaderCellDef><button mat-stroked-button (click)="onClick('add', null)">Thêm</button></mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<button mat-stroked-button (click)="onClick('edit', element)">Sửa</button>
+						<button mat-stroked-button (click)="onClick('remove', element)">Xóa</button>
+					</mat-cell>
+				 </ng-container>
+	  
+				<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+			</mat-table>
+		</div>
+	</mat-grid-tile>
+	<mat-grid-tile [colspan]="1" [rowspan]=10>
+		<div class="grid-container">
+			<mat-card>
+				<div *ngIf="action=='idle'">
+					Đang chờ...
+				</div>
+				<div *ngIf="action=='add'">
+					<mat-form-field>
+						<mat-label>Tên</mat-label>
+						<input matInput type="text" #Name placeholder="tên"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Chức vụ</mat-label>
+						<input matInput type="text" #Position placeholder="chức vụ"/>
+					</mat-form-field>
+					
+					
+					<mat-form-field>
+						<mat-label>Điện thoại</mat-label>
+						<input matInput type="text" #PhoneNumber placeholder="điện thoại"/>
+					</mat-form-field>
+					
+					<mat-card-actions>
+					<button mat-stroked-button (click)="add(Name.value, Position.value, PhoneNumber.value); Name.value=''; Position.value=''; PhoneNumber.value=''">THÊM</button>
+					<button mat-stroked-button (click)="onClick('cancel', null)">ĐÓNG</button>
+					</mat-card-actions>
+				</div>
+				
+				<div *ngIf="selected && action=='edit'">
+					<mat-form-field>
+						<mat-label>Tên</mat-label>
+						<input matInput type="text" [(ngModel)]="_name" placeholder="tên" value="{{selected.name}}"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Chức vụ</mat-label>
+						<input matInput type="text" [(ngModel)]="_position" placeholder="chức vụ" value="{{selected.position}}"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Điện thoại</mat-label>
+						<input matInput type="text" [(ngModel)]="_phone_number" placeholder="điện thoại" value="{{selected.phone_number}}"/>
+					</mat-form-field>
+					
+					<mat-card-actions>
+					<button mat-stroked-button (click)="onClick('submitedit', null)">NHẬP</button>
+					<button mat-stroked-button (click)="onClick('cancel', null)">ĐÓNG</button>
+					</mat-card-actions>
+				</div>
+			</mat-card>
+		</div>
+	</mat-grid-tile>
+</mat-grid-list>
+
+	
+	

@@ -1,0 +1,108 @@
+<mat-grid-list cols="6" rowHeight="54px">
+	<mat-grid-tile [colspan]="6" [rowspan]="1">
+		<div class="grid-container">
+			<mat-card>QUẢN LÝ NGUYÊN LIỆU</mat-card>
+		</div>
+	</mat-grid-tile>
+    <mat-grid-tile [colspan]="5" [rowspan]="10">
+		<div class="grid-container">
+			<mat-table [dataSource]="source" class="mat-elevation-z8 container">
+				<ng-container matColumnDef="id">
+					<mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+				</ng-container>
+			
+				<ng-container matColumnDef="name">
+					<mat-header-cell *matHeaderCellDef> Tên </mat-header-cell>
+					<mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+				</ng-container>
+
+	 
+				<ng-container matColumnDef="stock">
+					<mat-header-cell *matHeaderCellDef> Kho </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.stock}} {{element.unit}} </mat-cell>
+				</ng-container>
+	  
+				<ng-container matColumnDef="action">
+					<mat-header-cell *matHeaderCellDef><button mat-stroked-button (click)="onClick('add', null)">Thêm</button></mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<button mat-stroked-button (click)="onClick('edit', element)">Sửa</button>
+						<button mat-stroked-button (click)="onClick('remove', element)">Xóa</button>
+					</mat-cell>
+				 </ng-container>
+	  
+				<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+			</mat-table>
+		</div>
+	</mat-grid-tile>
+	<mat-grid-tile [colspan]="1" [rowspan]=10>
+		<div class="grid-container">
+			<mat-card>
+				<div *ngIf="action=='idle'">
+					Đang chờ...
+				</div>
+				<div *ngIf="action=='add'">
+					<mat-form-field>
+						<mat-label>Tên</mat-label>
+						<input matInput type="text" #Name placeholder="tên"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Số lượng</mat-label>
+						<input matInput type="number" #Stock placeholder="số lượng"/>
+					</mat-form-field>
+					
+					
+					<mat-form-field>
+						<mat-label>Đơn vị</mat-label>
+						<input matInput type="text" #Unit placeholder="đơn vị"/>
+					</mat-form-field>
+					
+					<mat-card-actions>
+					<button mat-stroked-button (click)="add(Name.value, Stock.value, Unit.value); Name.value=''; Stock.value=null; Unit.value=''">THÊM</button>
+					<button mat-stroked-button (click)="onClick('cancel', null)">ĐÓNG</button>
+					</mat-card-actions>
+				</div>
+				
+				<div *ngIf="selected && action=='edit'">
+					<mat-form-field>
+						<mat-label>Tên</mat-label>
+						<input matInput type="text" [(ngModel)]="_name" placeholder="tên" value="{{selected.name}}"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Số lượng</mat-label>
+						<input matInput type="number" [(ngModel)]="_stock" placeholder="số lượng" value="{{selected.stock}}"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Đơn vị</mat-label>
+						<input matInput type="text" [(ngModel)]="_unit" placeholder="đơn vị" value="{{selected.unit}}"/>
+					</mat-form-field>
+					
+					<mat-card-actions>
+					<button mat-stroked-button (click)="onClick('submitedit', null)">NHẬP</button>
+					<button mat-stroked-button (click)="onClick('cancel', null)">ĐÓNG</button>
+					</mat-card-actions>
+				</div>
+			</mat-card>
+		</div>
+	</mat-grid-tile>
+</mat-grid-list>
+
+
+<!--<mat-grid-list cols="4" rowHeight="100px">
+  <mat-grid-tile [colspan]="4" [rowspan]="1">
+    <mat-card style="margin-bottom: 5px"> QUẢN LÝ NGUYÊN LIỆU</mat-card>
+</mat-grid-tile>
+<mat-grid-tile [colspan]="3" [rowspan]="10">
+	
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="5">
+	<mat-card> HMM</mat-card>
+  </mat-grid-tile>
+</mat-grid-list>-->
+
+	
+	

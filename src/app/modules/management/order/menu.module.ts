@@ -8,7 +8,7 @@ import { MenuRoutingModule, MenuRoutedModule } from './menu-routing.module';
 		...MenuRoutedModule
 	],
 	imports: [
-		MenuRoutingModule
+		MenuRoutingModule,
 	]
 })
 export class MenuModule { }

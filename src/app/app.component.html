@@ -3,6 +3,7 @@
 		<button mat-icon-button class="menu-button" (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
 		<h1>SFCS</h1>
 		<span class="fill"></span>
+		<span>{{globals.currentuser}}</span>
 	</mat-toolbar>
 
 	<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true" (backdropClick)="snav.close()">
@@ -13,6 +14,7 @@
 					Trang chủ
 				</mat-list-item>
 				
+				<div *ngIf="globals.currentuser=='admin' || globals.currentuser=='anonymous' || globals.currentuser=='customer' || globals.currentuser=='localcustomer'">
 				<mat-divider></mat-divider>
 				
 				<div mat-subheader>KHÁCH HÀNG</div>
@@ -20,35 +22,38 @@
 					<mat-icon mat-list-icon>fastfood</mat-icon>
 					Thực đơn
 				</mat-list-item>
-				<mat-list-item routerLink=".">
+				<mat-list-item routerLink="/customer/order" *ngIf="globals.currentuser=='admin' || globals.currentuser=='customer'">
 				<mat-icon mat-list-icon>assignment</mat-icon>
 					Đặt hàng
 				</mat-list-item>
+				</div>
 				
+				<div *ngIf="globals.currentuser!='customer' && globals.currentuser!='anonymous' && globals.currentuser!='localcustomer'">
 				<mat-divider></mat-divider>
 				
 				<div mat-subheader>QUẢN LÝ</div>
-				<mat-list-item routerLink=".">
-					<mat-icon mat-list-icon>assignment</mat-icon>
+				<mat-list-item routerLink="/management/order">
+					<mat-icon mat-list-icon>assignment_turned_in</mat-icon>
 					Đơn hàng
 				</mat-list-item>
-				<mat-list-item routerLink="/management/menu">
+				<mat-list-item routerLink="/management/menu" *ngIf="globals.currentuser=='admin' || globals.currentuser=='manager'">
 					<mat-icon mat-list-icon>fastfood</mat-icon>
 					Thực đơn
 				</mat-list-item>
-				
-				<mat-list-item routerLink=".">
-					<mat-icon mat-list-icon>people_alt</mat-icon>
-					Nhân viên
-				</mat-list-item>
-				<mat-list-item routerLink=".">
+				<mat-list-item routerLink="/management/ingredient">
 					<mat-icon mat-list-icon>food_bank</mat-icon>
 					Nguyên liệu
 				</mat-list-item>
+				<mat-list-item routerLink="/management/employee" *ngIf="globals.currentuser=='admin' || globals.currentuser=='manager'">
+					<mat-icon mat-list-icon>people_alt</mat-icon>
+					Nhân viên
+				</mat-list-item>
+				</div>
 				
 				<mat-divider></mat-divider>
 				
 				<div mat-subheader>TÀI KHOẢN</div>
+				<div *ngIf="globals.currentuser=='anonymous'">
 				<mat-list-item routerLink="/auth/login">
 					<mat-icon mat-list-icon>login</mat-icon>
 					Đăng nhập
@@ -57,10 +62,28 @@
 					<mat-icon mat-list-icon>person_add</mat-icon>
 					Đăng ký
 				</mat-list-item>
+				</div>
+				<div *ngIf="globals.currentuser!='anonymous' && globals.currentuser!='localcustomer'">
+				<mat-list-item routerLink=".">
+					<mat-icon mat-list-icon>info</mat-icon>
+					Thông tin
+				</mat-list-item>
+				<mat-list-item routerLink="/auth/logout">
+					<mat-icon mat-list-icon>close</mat-icon>
+					Đăng xuất
+				</mat-list-item>
+				</div>
 			</mat-nav-list>
 		</mat-sidenav>
 		<div class="container-body">
 			<router-outlet></router-outlet>
+			
+			<!--<button (click)="post()">Add</button>
+			<ol>
+				<li *ngFor="let message of messages | async">
+					{{message.message}}
+				</li>
+			</ol>-->
 		</div>
 	</mat-sidenav-container>
 </div>

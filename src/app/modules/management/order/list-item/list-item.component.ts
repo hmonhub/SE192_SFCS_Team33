@@ -7,7 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 	styleUrls: ['./list-item.component.scss']
 })
 export class ListItemComponent implements OnInit {
-	
 	constructor() {}
 	
 	ngOnInit() {}

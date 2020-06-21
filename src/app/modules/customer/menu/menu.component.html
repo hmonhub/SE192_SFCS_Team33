@@ -1,0 +1,19 @@
+<div class="container">
+<mat-card style="margin-bottom: 10px">
+	THỰC ĐƠN
+</mat-card>
+</div>
+<mat-grid-list cols="4" rowHeight="2:3">
+	<mat-grid-tile *ngFor="let element of source">
+		<mat-card class="item">
+			<mat-card-header>
+				<mat-card-title>{{element.name}}</mat-card-title>
+				<mat-card-subtitle>{{element.price}} VNĐ</mat-card-subtitle>
+			</mat-card-header>
+			<img mat-card-image [src]="element.img" alt="element.name" width="300px" height="200px">
+			<mat-card-content>
+				<p>{{element.des}}</p>
+			</mat-card-content>
+		</mat-card>
+	</mat-grid-tile>
+</mat-grid-list>

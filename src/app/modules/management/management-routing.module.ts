@@ -1,24 +1,29 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ManagementComponent } from './management.component';
+//import { ManagementComponent } from './management.component';
+import { IngredientComponent } from './ingredient/ingredient.component'
+import { MenuComponent } from './menu/menu.component'
+import { EmployeeComponent } from './employee/employee.component'
 
 export const ManagementRoutedModule = [
-	ManagementComponent,
+	IngredientComponent,
+	MenuComponent,
+	EmployeeComponent,
 ]
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ManagementComponent,
-    children: [
-      {
+	{
+        path: 'ingredient',
+		component: IngredientComponent
+    },
+	{
         path: 'menu',
-        loadChildren: () => import('./menu/menu.module')
-          .then(m => m.MenuModule),
-      },
-	  //more path add later
-    ],
-  }
+		component: MenuComponent
+    },
+	{
+        path: 'employee',
+		component: EmployeeComponent
+    },
 ];
 
 @NgModule({
