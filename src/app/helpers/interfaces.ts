@@ -30,17 +30,19 @@ export interface Item {
 export interface ItemOrder {
 	id: number;
 	name: string;
-	price: string;
+	price: number;
 	no: number;
 }
 
 export interface Order {
 	id: number;
-	customer_id: number;
-	time_created: Date;
-	time_receive: Date;
+	customer: string;
+	time_created: string;
+	time_receive: string;
 	order_status: string;
 	list_item: ItemOrder[];
+	total: number;
+	order_type: string;
 }
 
 export interface Employee {

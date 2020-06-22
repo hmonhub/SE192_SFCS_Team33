@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { IngredientComponent } from './ingredient/ingredient.component'
 import { MenuComponent } from './menu/menu.component'
 import { EmployeeComponent } from './employee/employee.component'
+import { OrderComponent } from './order/order.component'
 
 export const ManagementRoutedModule = [
 	IngredientComponent,
 	MenuComponent,
 	EmployeeComponent,
+	OrderComponent,
 ]
 
 const routes: Routes = [
@@ -23,6 +25,10 @@ const routes: Routes = [
 	{
         path: 'employee',
 		component: EmployeeComponent
+    },
+	{
+        path: 'order',
+		component: OrderComponent
     },
 ];
 

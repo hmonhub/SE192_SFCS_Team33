@@ -1,1 +1,99 @@
-<p>ĐÂY LÀ TRANG TẠO ĐƠN ĐẶT HÀNG</p>
+<mat-grid-list cols="10" rowHeight="54px">
+	<mat-grid-tile [colspan]="5" [rowspan]="1">
+		<div class="grid-container">
+			<mat-card>ĐẶT HÀNG</mat-card>
+		</div>
+	</mat-grid-tile>
+	<mat-grid-tile [colspan]="5" [rowspan]="1">
+		<div class="grid-container">
+			<mat-card>Món đã đặt</mat-card>
+		</div>
+	</mat-grid-tile>
+	
+	<mat-grid-tile [colspan]="5" [rowspan]="10">
+		<div class="grid-container">
+			<mat-card>
+				<mat-form-field style="margin: 15px;">
+					<mat-label>Khách hàng</mat-label>
+					<input matInput disabled value="{{globals.currentuser}}"/>
+				</mat-form-field>
+				
+				<mat-form-field style="margin: 15px;">
+					<mat-label>Ngày đặt</mat-label>
+					<input matInput disabled value="{{_time_created}}"/>
+				</mat-form-field>
+				
+				<mat-form-field style="margin: 15px;">
+					<mat-label>Hình thức</mat-label>
+					<mat-select [(ngModel)]="_order_type" value="_order_type">
+						<mat-option [value]="'Tại quán'">Tại quán</mat-option>
+						<mat-option [value]="'Mang đi'">Mang đi</mat-option>
+					</mat-select>
+				</mat-form-field>
+				
+				<mat-divider></mat-divider>
+				
+				<button mat-stroked-button (click)="onClick('additem',null)" style="margin-top: 20px">Thêm món</button>
+				
+				<div *ngIf="action=='add'">
+				<mat-form-field style="margin: 15px;">
+					<mat-label>Chọn món</mat-label>
+					<mat-select [(ngModel)]="_toadd_item" name="item">
+						<mat-option *ngFor="let item of source" [value]="item">{{item.name}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				
+				<mat-form-field style="margin: 15px;">
+					<mat-label>Số lượng</mat-label>
+					<input matInput type="number" [(ngModel)]="_toadd_number"/>
+				</mat-form-field>
+				
+				<button mat-stroked-button style="margin-left: 15px" [disabled]="_toadd_item==null || _toadd_number==null" (click)="onClick('additemtolist',null)">Thêm</button>
+				<button mat-stroked-button (click)="onClick('additemcancel',null)">Hủy</button>
+				
+				
+				</div>
+			</mat-card>
+		</div>
+	</mat-grid-tile>
+	<mat-grid-tile [colspan]="5" [rowspan]="10">
+		<div class="grid-container">
+			<mat-table [dataSource]="list_item" class="mat-elevation-z8 container">
+				<ng-container matColumnDef="id">
+					<mat-header-cell *matHeaderCellDef> STT </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+				</ng-container>
+				
+				<ng-container matColumnDef="name">
+					<mat-header-cell *matHeaderCellDef> Tên món </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+				</ng-container>
+  
+				<ng-container matColumnDef="price">
+					<mat-header-cell *matHeaderCellDef> Giá tiền </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+				</ng-container>
+				
+				<ng-container matColumnDef="number">
+					<mat-header-cell *matHeaderCellDef> Số lượng </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.no}} </mat-cell>
+				</ng-container>
+				
+				<ng-container matColumnDef="action">
+					<mat-header-cell *matHeaderCellDef></mat-header-cell>
+					<mat-cell *matCellDef="let element">????</mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+			</mat-table>
+			<br>
+			Tổng tiền: {{_total}} VNĐ
+			<mat-list>
+				<mat-list-item *ngFor="let i of list_item">
+					{{i.id}} {{i.name}} {{i.price}} {{i.no}}
+				</mat-list-item>
+			</mat-list>
+		</div>
+	</mat-grid-tile>
+</mat-grid-list>

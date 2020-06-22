@@ -12,6 +12,7 @@ import { DataService }  from '@app/helpers/mock/data.service';
 import { IngredientService }  from '@app/helpers/mock/ingredient.service';
 import { ItemService }  from '@app/helpers/mock/item.service';
 import { EmployeeService }  from '@app/helpers/mock/employee.service';
+import { OrderService }  from '@app/helpers/mock/order.service';
 import { Globals } from './helpers/user';
 //-----------------------------------------------------------------------------------
 @NgModule({
@@ -27,7 +28,7 @@ import { Globals } from './helpers/user';
 		HttpClientModule,
 		HttpClientInMemoryWebApiModule.forRoot(DataService, { dataEncapsulation: false })
 	],
-	providers: [Globals,DataService, IngredientService, ItemService, EmployeeService],
+	providers: [Globals,DataService, IngredientService, ItemService, EmployeeService, OrderService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

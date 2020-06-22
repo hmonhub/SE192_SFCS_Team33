@@ -1,0 +1,112 @@
+<mat-grid-list cols="10" rowHeight="54px">
+	<mat-grid-tile [colspan]="10" [rowspan]="1">
+		<div class="grid-container">
+			<mat-card>QUẢN LÝ ĐƠN HÀNG</mat-card>
+		</div>
+	</mat-grid-tile>
+    <mat-grid-tile [colspan]="7" [rowspan]="10">
+		<div class="grid-container">
+			<mat-table [dataSource]="source" class="mat-elevation-z8 container">
+				<ng-container matColumnDef="id">
+					<mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+				</ng-container>
+				
+				<ng-container matColumnDef="customer">
+					<mat-header-cell *matHeaderCellDef>Người đặt hàng</mat-header-cell>
+					<mat-cell *matCellDef="let element">{{element.customer}}</mat-cell>
+				</ng-container>
+			
+				<ng-container matColumnDef="time_created">
+					<mat-header-cell *matHeaderCellDef> Thời điểm đặt hàng</mat-header-cell>
+					<mat-cell *matCellDef="let element">{{element.time_created}}</mat-cell>
+				</ng-container>
+
+	 
+				<ng-container matColumnDef="total">
+					<mat-header-cell *matHeaderCellDef> Tổng tiền </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.total}} VNĐ</mat-cell>
+				</ng-container>
+				
+				<ng-container matColumnDef="order_status">
+					<mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.order_status}}</mat-cell>
+				</ng-container>
+	  
+				<ng-container matColumnDef="action">
+					<mat-header-cell *matHeaderCellDef></mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<button mat-stroked-button (click)="onClick('edit', element)">Chi tiết</button>
+					</mat-cell>
+				 </ng-container>
+	  
+				<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+			</mat-table>
+		</div>
+	</mat-grid-tile>
+	
+	<mat-grid-tile [colspan]="3" [rowspan]=10>
+		<div class="grid-container">
+			<mat-card>
+				<div *ngIf="action=='idle'">
+					Đang chờ...
+				</div>
+				<div *ngIf="selected && action=='edit'">
+					<mat-form-field>
+						<mat-label>ID</mat-label>
+						<input matInput disabled value="{{selected.id}}"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Người đặt hàng</mat-label>
+						<input matInput disabled value="{{selected.customer}}"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Thời điểm đặt hàng</mat-label>
+						<input matInput disabled value="{{selected.time_created}}"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Thời điểm nhận hàng</mat-label>
+						<input matInput disabled value="{{selected.time_receive}}"/>
+					</mat-form-field>
+										
+					<mat-form-field>
+						<mat-label>Tổng tiền</mat-label>
+						<input matInput disabled value="{{selected.total}}"/>
+					</mat-form-field>
+					
+					<mat-form-field>
+						<mat-label>Trạng thái</mat-label>
+						<mat-select [(value)]="_order_status" [disabled]="selected.order_status=='Hoàn thành'">
+							<mat-option [value]="0">Mới</mat-option>
+							<mat-option [value]="1"> Chấp nhận</mat-option>
+							<mat-option [value]="2"> Chờ giao </mat-option>
+							<mat-option [value]="3"> Hoàn thành </mat-option>
+						</mat-select>
+					</mat-form-field>
+					
+					<mat-divider></mat-divider>
+					<mat-grid-list cols="3" rowHeight="3:1">
+						<div class="item-container">
+							<mat-grid-tile [colspan]="3">Danh sách</mat-grid-tile>
+							<mat-grid-tile *ngFor="let i of selected.list_item">
+							<mat-icon>keyboard_arrow_right</mat-icon>
+							{{i.no}} {{i.name}}
+							</mat-grid-tile>
+						</div>
+					</mat-grid-list>
+					<mat-divider></mat-divider>
+
+					
+					<mat-card-actions>
+						<button mat-stroked-button (click)="onClick('submitedit', null)" [disabled]="selected.order_status=='Hoàn thành'">NHẬP</button>
+						<button mat-stroked-button (click)="onClick('cancel', null)">ĐÓNG</button>
+					</mat-card-actions>
+				</div>
+			</mat-card>
+		</div>
+	</mat-grid-tile>
+</mat-grid-list>

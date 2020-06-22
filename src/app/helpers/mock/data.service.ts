@@ -3,6 +3,9 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Ingredient } from '../interfaces';
 import { Item } from '../interfaces';
 import { Employee } from '../interfaces';
+import { Order } from '../interfaces';
+//import { ItemOrder } from '../interfaces';
+
 @Injectable({
 	providedIn: 'root',
 })
@@ -151,10 +154,28 @@ export class DataService implements InMemoryDbService {
 				phone_number: ''
 			},
 		];
-		return {ingredients, items, employees};
+		let orders = [
+			{
+				id: 1,
+				customer: 'localcustomer',
+				time_created: null,
+				time_receive: null,
+				order_status: 'Mới',
+				list_item: [
+					{
+						id: 1,
+						name: 'Cơm sườn',
+						price: 20000,
+						no: 2
+					}
+				],
+				total: 40000
+			}
+		];
+		return {ingredients, items, employees, orders};
 	}
 
-	genId<T extends Ingredient | Item | Employee>(myTable: T[]): number {
+	genId<T extends Ingredient | Item | Employee | Order>(myTable: T[]): number {
 		return myTable.length > 0 ? Math.max(...myTable.map(t => t.id)) + 1 : 11;
 	}
 }
