@@ -4,8 +4,8 @@ import { Globals } from '@app/helpers/user';
 import { Item } from '@app/helpers/interfaces';
 import { ItemService } from '@app/helpers/mock/item.service';
 import { ItemOrder } from '@app/helpers/interfaces';
-//import { Order } from '@app/helpers/interfaces';
-//import { OrderService } from '@app/helpers/mock/order.service';
+import { Order } from '@app/helpers/interfaces';
+import { OrderService } from '@app/helpers/mock/order.service';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -17,6 +17,7 @@ export class CreateOrderComponent implements OnInit {
 	source: Item[];
 	action: string;
 	
+	order: Order;
 	
 	//order
 	_time_created: string;
@@ -27,11 +28,12 @@ export class CreateOrderComponent implements OnInit {
 	_toadd_item: Item;
 	_toadd_number: number;
 	list_item: ItemOrder[];
-	displayedColumns: string[] = ['id', 'name', 'price', 'number', 'action'];
+	displayedColumns: string[] = ['id', 'name', 'price', 'no', 'action'];
 	
 	constructor(
 		private service: ItemService,
 		public globals: Globals,
+		private orderService: OrderService,
 	) {}
 	
 	ngOnInit() {
@@ -75,6 +77,16 @@ export class CreateOrderComponent implements OnInit {
 			this._toadd_number=null;
 		}
 		
+		/*if (action=='addorder') {
+			this.OrderService.additem(<unknown>{globals.currentuser, this._time_created,this._time_created, this.list_item, this._total, this._order_type} as Order);
+			//.subscribe(elem => {
+			//	this.source.push(elem);
+			//	this.getList();
+			//});
+			
+			this.action='idle';
+		}*/
+		
 	}
 	
 	get_date() {
@@ -87,6 +99,10 @@ export class CreateOrderComponent implements OnInit {
 		document.write(this._time_created);
 	}
 	
+	add(cus: string, tc: string, tr: string, list: ItemOrder[], tt: number, type: string){
+		this.orderService.additem(<unknown>{cus, tc,tr, list, tt, type} as Order);
+		this.action='idle';
+	}
 	/*cal_total()
 	{
 		var t;

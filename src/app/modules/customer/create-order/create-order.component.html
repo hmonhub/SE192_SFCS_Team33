@@ -58,7 +58,7 @@
 	</mat-grid-tile>
 	<mat-grid-tile [colspan]="5" [rowspan]="10">
 		<div class="grid-container">
-			<mat-table [dataSource]="list_item" class="mat-elevation-z8 container">
+			<!--<mat-table [dataSource]="list_item" class="mat-elevation-z8 container">
 				<ng-container matColumnDef="id">
 					<mat-header-cell *matHeaderCellDef> STT </mat-header-cell>
 					<mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
@@ -74,26 +74,34 @@
 					<mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
 				</ng-container>
 				
-				<ng-container matColumnDef="number">
+				<ng-container matColumnDef="no">
 					<mat-header-cell *matHeaderCellDef> Số lượng </mat-header-cell>
 					<mat-cell *matCellDef="let element"> {{element.no}} </mat-cell>
 				</ng-container>
 				
 				<ng-container matColumnDef="action">
 					<mat-header-cell *matHeaderCellDef></mat-header-cell>
-					<mat-cell *matCellDef="let element">????</mat-cell>
+					<mat-cell *matCellDef="let element">
+						<button mat-stroked-button>Xóa</button>
+					</mat-cell>
 				</ng-container>
 
 				<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
 				<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-			</mat-table>
-			<br>
-			Tổng tiền: {{_total}} VNĐ
+			</mat-table>-->
+			
 			<mat-list>
-				<mat-list-item *ngFor="let i of list_item">
-					{{i.id}} {{i.name}} {{i.price}} {{i.no}}
+				<mat-list-item *ngFor="let i of list_item" style="margin-button: 10px">
+					{{i.id}} - {{i.name}} - {{i.price}} - {{i.no}} <button mat-stroked-button>Hủy</button>
 				</mat-list-item>
 			</mat-list>
+			
+			<mat-card>
+				Tổng tiền: {{_total}} VNĐ
+				<mat-card-actions>
+					<button mat-stroked-button (click)="add(globals.currentuser, _time_created, _time_created, list_item, _total, _order_type)">Đặt hàng</button><button mat-stroked-button routerLink="/customer/menu">Hủy</button>
+				</mat-card-actions>
+			</mat-card>
 		</div>
 	</mat-grid-tile>
 </mat-grid-list>

@@ -1,5 +1,5 @@
 .container {
-  max-height: 540px;
+  max-height: 486px;
   overflow: auto;
 }
 
@@ -15,4 +15,8 @@ button {
 
 .item-container {
 	width: 100%;
+}
+
+.fill {
+	flex: 1 1 auto;
 }
