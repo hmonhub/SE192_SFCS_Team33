@@ -1,4 +1,27 @@
-.container {
+.bg {
+	background-image: url('../assets/images/background.jpg');
+	height: 100%;
+	background-position: center;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.banner {
+	background-image: url('../assets/images/banner.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	max-width: 100%;
+	font-size: 10vw;
+}
+
+.content {
+	max-width: 1300px;
+	margin: auto;
+	height: 3000px;
+	background-color: orange;
+	border: 2px solid white;
+}
+/*.container {
 	display: flex;
 	flex-direction: column;
 	position: absolute;
@@ -28,4 +51,4 @@
 
 .container-body {
 	padding: 10px;
-}
+}*/
