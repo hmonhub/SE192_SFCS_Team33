@@ -1,0 +1,25 @@
+<mat-grid-list cols="3" rows="5" rowHeight="120px">
+	<mat-grid-tile [colspan]="3" [rowspan]="1"></mat-grid-tile>
+	<mat-grid-tile [colspan]="1" [rowspan]="3"></mat-grid-tile>
+	<mat-grid-tile [colspan]="1" [rowspan]="3">
+		<mat-card class="login-form">
+			<mat-card style="margin-bottom: 15px">ĐĂNG NHẬP</mat-card>
+			<mat-divider></mat-divider>
+			<mat-form-field>
+				<mat-label>Tên đăng nhập</mat-label>
+					<input style="width: 380px" matInput type="text" #username placeholder="tên đăng nhập"/>
+				</mat-form-field>
+				<br>
+				<mat-form-field>
+					<mat-label>Mật khẩu</mat-label>
+					<input matInput type="password" #password placeholder="mật khẩu"/>
+				</mat-form-field>
+			<mat-divider></mat-divider>
+			<mat-card-actions>
+				<button mat-stroked-button (click)="onClick(username.value, password.value); password.value=''">Login</button>
+			</mat-card-actions>
+		</mat-card>
+	</mat-grid-tile>
+	<mat-grid-tile [colspan]="1" [rowspan]="3"></mat-grid-tile>
+	<mat-grid-tile [colspan]="3" [rowspan]="1"></mat-grid-tile>
+</mat-grid-list>
